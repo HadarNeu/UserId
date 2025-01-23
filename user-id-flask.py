@@ -18,13 +18,13 @@ def present_users_matadata(user_id):
     users_metadata = extract_user_metadata(users_data, user_id)
 
     if not users_metadata:
-        return f"The user you have requested does not exist in our DB. Please try again! "
+        return f"The user you have requested does not exist in our DB. Please try again! ", 404
     return format_metadata(users_metadata)
 
 # Custom handler for 404 errors
 @app.errorhandler(404)
 def page_not_found(error):
-    return f"The page you are looking for does not exist. Please look for an integer!", 404
+    return f"The page you are looking for does not exist. Remember, user ID's are integers only!", 404
 
 
 def extract_user_metadata(all_data, user_id):
