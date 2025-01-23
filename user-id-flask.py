@@ -42,8 +42,6 @@ def extract_user_metadata(all_data, user_id):
     all_metadata = all_data.get_json()
     # Filter users_metadata for the specific user
     user_metadata = [todo for todo in all_metadata if todo['userId'] == user_id]
-
-    print(f"this is the users_mtadata from the extract method {user_metadata}")
     return user_metadata
 
 def format_metadata(metadata):
@@ -76,4 +74,4 @@ def format_metadata(metadata):
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host="0.0.0.0", port=5000)
