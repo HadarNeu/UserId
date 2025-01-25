@@ -23,8 +23,7 @@ The app is deployed locally using minikube and is installed via helm.
 ## Challanges
 1. No "merge" event so I had to use the push event. 
 2. Data formatting - \n doesnt work in Flask. 
-3. Docker limit for private images. Decided to make the image public. 
-4. Image permissions, decided to use kubectl secrets to solve the issue. 
+3. Decided to make the image public in order for anyone to run the image. 
 
 ## Whats Next? 
 1. make sure no one can push to main unless it's with an approved PR. 
