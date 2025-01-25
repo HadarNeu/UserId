@@ -14,8 +14,6 @@ spec:
             labels:
                 app: {{ .Values.deployment.app.name }}
         spec:
-            imagePullSecrets:
-            - name: regcred
             containers:
             - name: {{ .Values.deployment.app.name }}
               image: {{ .Values.deployment.app.image }}
