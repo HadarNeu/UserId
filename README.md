@@ -24,7 +24,7 @@ For budget reasons I have created and tested my app in a local minikube cluster.
 ## Whats Next? 
 1. **Schema validation-** add schema validation to the code via [pydantic](https://pypi.org/project/pydantic/) package. 
 2. **Cache-** implement cache for the get_json() function via [FlaskCaching](https://pypi.org/project/Flask-Caching/1.10.1/) package.
-3. **Ingress controller-** add to the minikube deployment [IngressController](https://kubernetes.io/docs/tasks/access-application-cluster/ingress-minikube/)
+3. **Ingress controller-** add ingress controller. [IngressController](https://kubernetes.io/docs/tasks/access-application-cluster/ingress-minikube/)
 4. **Implement Uplift -** uplift is a version management solution that can increase the version number in every PR/ commit to main. [Uplift](https://upliftci.dev/)
 
 ## So how can YOU use this app?
