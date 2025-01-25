@@ -10,6 +10,7 @@ logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
     handlers=[logging.StreamHandler(sys.stdout)] # Log to console
 )
+
 logger = logging.getLogger(__name__)
 
 app = Flask(__name__)
@@ -128,4 +129,4 @@ def format_data(user_entries: typing.List[dict]) -> str:
     return f"<pre>{render_template_string(formatted_html)}</pre>"
 
 if __name__ == '__main__':
-    app.run(debug=True, host="0.0.0.0", port=5000)
+    app.run(debug=True, host="0.0.0.0", port=80)
