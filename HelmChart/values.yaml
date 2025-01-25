@@ -11,5 +11,5 @@ service:
     protocol: "TCP"
     port: 80 #the service
     targetPort: 80 # the pod 
-    nodePort: 3001 #the node (actual hosting machine) port 
+    nodePort: 30001 #the node (actual hosting machine) port 
     type: "NodePort"
