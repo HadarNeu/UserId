@@ -1,0 +1,15 @@
+deployment:
+  app:
+    image: "hadarneu/user-id"
+    name: "user-id"
+    replicas: 2
+    imagePullPolicy: "IfNotPresent"
+    containerPort: 80 # port of container inside the pod
+service:
+  app:
+    name: "app-service"
+    protocol: "TCP"
+    port: 80 #the service
+    targetPort: 80 # the pod 
+    nodePort: 5000 #the node (actual hosting machine) port 
+    type: "NodePort"
