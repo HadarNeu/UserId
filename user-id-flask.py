@@ -13,13 +13,13 @@ def get_json():
 
 
 @app.route('/json/user/<int:user_id>', methods=['GET'])
-def present_users_matadata(user_id):
-    users_data = get_json()
-    users_metadata = extract_user_metadata(users_data, user_id)
+def present_users_data(user_id):
+    all_data = get_json()
+    users_data = extract_user_data(all_data, user_id)
 
-    if not users_metadata:
+    if not users_data:
         return f"The user you have requested does not exist in our DB. Please try again! ", 404
-    return format_metadata(users_metadata)
+    return format_data(users_data)
 
 # Custom handler for 404 errors
 @app.errorhandler(404)
@@ -27,49 +27,47 @@ def page_not_found(error):
     return f"The page you are looking for does not exist. Remember, user ID's are integers only!", 404
 
 
-def extract_user_metadata(all_data, user_id):
+def extract_user_data(all_data, user_id):
     """
-    Extract raw metadata for a specific user.
+    Extract raw data for a specific user.
     
     Args:
-        users_data (list): List of todo dictionaries
-        user_id (int): User ID to extract metadata for
+        all_data (list): List of users data dictionaries
+        user_id (int): User ID to extract data for
     
     Returns:
-        dict: Raw metadata for the specified user
+        dict: Raw data for the specified user
     """
 
-    all_metadata = all_data.get_json()
-    # Filter users_metadata for the specific user
-    user_metadata = [todo for todo in all_metadata if todo['userId'] == user_id]
-    return user_metadata
+    all_data = all_data.get_json()
+    # Filters data for the specific user
+    user_data = [key for key in all_data if key['userId'] == user_id]
+    return user_data
 
-def format_metadata(metadata):
+def format_data(users_data):
     """
-    Format metadata into readable blocks.
+    Format users data into readable blocks.
     
     Args:
-        metadata (dict): Metadata dictionary
+        users_data(list): specific users data list that contains dictionaries as objects. 
     
     Returns:
-        str: Formatted metadata
+        str: Formatted data
     """
-    formatted = f"User ID: {metadata[0]['userId']}\n"
+    formatted = f"User ID: {users_data[0]['userId']}\n"
     formatted += "="*40 + "\n"
     
-    for todo in metadata:
-        #completed readable: completed vs incomplete
-        completed_status = "Completed" if todo['completed'] else "Incomplete" 
-        formatted += f"Todo ID: {todo['id']}\n"
-        formatted += f"Title: {todo['title']}\n"
+    for key in users_data:
+        # convert Completed bool value to a more readable value: completed vs incomplete
+        completed_status = "Completed" if key['completed'] else "Incomplete" 
+        formatted += f"Todo ID: {key['id']}\n"
+        formatted += f"Title: {key['title']}\n"
         formatted += f"Completed: {completed_status}\n"
         formatted += "-"*40 + "\n\n"
 
-    
+    # replacing newline with <br> to get the newline effect in Flask. 
     formatted_html = formatted.replace('\n', '<br>') 
-
     formatted_html_rendered = render_template_string(formatted_html)    
-    
     return f"<pre>{formatted_html_rendered}</pre>"
 
 
