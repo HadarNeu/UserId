@@ -129,4 +129,4 @@ def format_data(user_entries: typing.List[dict]) -> str:
     return f"<pre>{render_template_string(formatted_html)}</pre>"
 
 if __name__ == '__main__':
-    app.run(debug=True, host="0.0.0.0", port=80)
+    app.run(host="0.0.0.0", port=80)
