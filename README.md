@@ -46,5 +46,7 @@ Deploy the helm chart:
 helm install user-id-app ./HelmChart --values ./HelmChart/values.yaml
 
 Expose the NodePort service (skip this step if you are running the app on a k8s cloud dist.)
-minikube service nginx-service
+minikube service app-service
+
+Use the minikube IP and port of the service on your browser. 
 
