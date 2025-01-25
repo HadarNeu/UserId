@@ -1,4 +1,4 @@
-name: SQS Automation Docker Build and Push
+name: Generic Docker Build and Push
 
 permissions:
   security-events: write
@@ -32,6 +32,20 @@ jobs:
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ vars.IMAGE_NAME }}:${{ vars.VERSION }}
           push: false 
 
+      - name: Run Trivy image vulnerability scanner
+        uses: aquasecurity/trivy-action@7b7aa264d83dc58691451798b4d117d53d21edfe
+        with:
+          image-ref: ${{ secrets.DOCKERHUB_USERNAME }}/${{ vars.IMAGE_NAME }}:${{ vars.VERSION }}
+          format: 'template'
+          template: '@/contrib/sarif.tpl'
+          output: 'trivy-image-results.sarif'
+          severity: 'CRITICAL,HIGH,MEDIUM'
+
+      - name: Upload Trivy scan results to GitHub Security tab
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: 'trivy-image-results.sarif'
+          
       - name: Push Docker image
         uses: docker/build-push-action@v5
         with:
