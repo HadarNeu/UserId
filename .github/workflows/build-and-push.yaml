@@ -1,4 +1,4 @@
-name: SQS Automation Docker Build and Push
+name: Generic Docker Build and Push
 
 permissions:
   security-events: write
