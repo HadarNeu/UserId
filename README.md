@@ -23,6 +23,7 @@ The app is deployed locally using minikube and is installed via helm.
 ## Challanges
 1. No "merge" event so I had to use the push event. 
 2. Data formatting - \n doesnt work in Flask. 
+3. Docker limit for private images. 
 
 ## Whats Next? 
 1. make sure no one can push to main unless it's with an approved PR. 
