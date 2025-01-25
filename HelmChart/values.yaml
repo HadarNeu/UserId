@@ -1,6 +1,6 @@
 deployment:
   app:
-    image: "hadarneu/user-id"
+    image: "hadarneu/user-id:latest"
     name: "user-id"
     replicas: 2
     imagePullPolicy: "IfNotPresent"

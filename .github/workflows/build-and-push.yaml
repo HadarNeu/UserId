@@ -23,7 +23,9 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: .
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ vars.IMAGE_NAME }}:${{ vars.VERSION }}
+          tags: |
+            ${{ secrets.DOCKERHUB_USERNAME }}/${{ vars.IMAGE_NAME }}:${{ vars.VERSION }}
+            ${{ secrets.DOCKERHUB_USERNAME }}/${{ vars.IMAGE_NAME }}:latest
           push: false 
 
       - name: Run Trivy image vulnerability scanner
