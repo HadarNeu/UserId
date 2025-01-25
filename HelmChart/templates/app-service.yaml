@@ -1,13 +1,13 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ .Values.service.app.name }}
+  name: {{ .Values.service.name }}
 spec:
   selector:
-    app: {{ .Values.deployment.app.name }}
+    app: {{ .Values.app.name }}
   ports:
-  - protocol: {{ .Values.service.app.protocol }}
-    port: {{ .Values.service.app.port }}
-    targetPort: {{ .Values.service.app.targetPort }}
-    nodePort: {{ .Values.service.app.nodePort }}
-  type: {{ .Values.service.app.type }}
+  - protocol: {{ .Values.service.protocol }}
+    port: {{ .Values.service.port }}
+    targetPort: {{ .Values.service.targetPort }}
+    nodePort: {{ .Values.service.nodePort }}
+  type: {{ .Values.service.type }}

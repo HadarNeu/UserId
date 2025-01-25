@@ -8,7 +8,7 @@ User Data Retrieval Flask Application.
 
 #### Key Features:
 - Dynamic user data filtering
-- RESTful JSON retrieval
+- API JSON retrieval
 - HTML-formatted data presentation
 - Error handling for invalid user IDs
 
@@ -18,34 +18,23 @@ User Data Retrieval Flask Application.
 - GET /json/user/<user_id> : User-specific data display
 
 ## Deployment
-The app is deployed locally using minikube and is installed via helm. 
-
-## Challanges
-1. No "merge" event so I had to use the push event. 
-2. Data formatting - \n doesnt work in Flask. 
-3. Decided to make the image public in order for anyone to run the image. 
+The app can be deployed in any K8s deployment (EKS, GKE, AKS ...) since it's using a helm chart. 
+For budget reasons I have created and tested my app in a local minikube cluster. 
 
 ## Whats Next? 
-1. make sure no one can push to main unless it's with an approved PR. 
-2. Add schema validation to the code 
-3. Add cache implementation to app 
-4. Add ingress controller to the minikube deployment
-5. Add version management tool called uplift 
+1. **Schema validation-** add schema validation to the code via [pydantic](https://pypi.org/project/pydantic/) package. 
+2. **Cache-** implement cache for the get_json() function via [FlaskCaching](https://pypi.org/project/Flask-Caching/1.10.1/) package.
+3. **Ingress controller-** add to the minikube deployment [IngressController](https://kubernetes.io/docs/tasks/access-application-cluster/ingress-minikube/)
+4. **Implement Uplift -** uplift is a version management solution that can increase the version number in every PR/ commit to main. [Uplift](https://upliftci.dev/)
 
 ## So how can YOU use this app?
-Install minikube (a single node kubernetes tool). It's a great way for you to learn k8s and practice the skills in your home environment. Your'e going to need a docker engine installed as well. OR You can deploy this chart on your cloud kubernetes distribution. (Eks, Ecs etc.)
+1. Choose a k8s distribution for the deployment of the app (EKS, minikube...)
+2. Clone the repository (for the helm chart). 
+3. Modify the ```./HelmChart/values.yaml``` file for your system's configuration. 
+4. Helm install - you can use this command: 
+```helm install user-id-app ./HelmChart --values ./HelmChart/values.yaml```
+5. Optional: if you are using minikube, run this command to enable the NodePort service: 
+```minikube service app-service```
 
-Clone the repository (for the helm chart)/ copy the helm chart and create your own values.yaml. 
-
-Start the minikube cluster:
-
-minikube start --driver=docker
-
-Deploy the helm chart:
-helm install user-id-app ./HelmChart --values ./HelmChart/values.yaml
-
-Expose the NodePort service (skip this step if you are running the app on a k8s cloud dist.)
-minikube service app-service
-
-Use the minikube IP and port of the service on your browser. 
+You can now use the app on your bowser. 
 
